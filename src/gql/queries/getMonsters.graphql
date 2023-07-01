@@ -1,0 +1,6 @@
+query getMonsters {
+  monsters {
+    name
+    index
+  }
+}
