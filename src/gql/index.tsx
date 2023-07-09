@@ -2072,15 +2072,17 @@ export type WizardSpecific = {
   arcane_recovery_levels: Scalars['Int']['output'];
 };
 
-export type GetMonstersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetMonstersQueryVariables = Exact<{
+  limit: Scalars['Int']['input'];
+}>;
 
 
 export type GetMonstersQuery = { __typename?: 'Query', monsters?: Array<{ __typename?: 'Monster', name: string, index: string }> | null };
 
 
 export const GetMonstersDocument = gql`
-    query getMonsters {
-  monsters {
+    query getMonsters($limit: Int!) {
+  monsters(limit: $limit) {
     name
     index
   }
@@ -2099,10 +2101,11 @@ export const GetMonstersDocument = gql`
  * @example
  * const { data, loading, error } = useGetMonstersQuery({
  *   variables: {
+ *      limit: // value for 'limit'
  *   },
  * });
  */
-export function useGetMonstersQuery(baseOptions?: Apollo.QueryHookOptions<GetMonstersQuery, GetMonstersQueryVariables>) {
+export function useGetMonstersQuery(baseOptions: Apollo.QueryHookOptions<GetMonstersQuery, GetMonstersQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetMonstersQuery, GetMonstersQueryVariables>(GetMonstersDocument, options);
       }

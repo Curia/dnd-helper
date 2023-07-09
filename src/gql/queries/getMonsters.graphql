@@ -1,5 +1,5 @@
-query getMonsters {
-  monsters {
+query getMonsters($limit: Int!) {
+  monsters(limit: $limit) {
     name
     index
   }

@@ -5,6 +5,7 @@ import apolloClient from "@/lib/apolloClient";
 // saas ui
 import Link, { LinkProps } from 'next/link'
 import { SaasProvider } from '@saas-ui/react'
+import { ConstantsProvider } from './constantsProvider';
 
 const NextLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
   (props, ref) => <Link ref={ref} {...props} />
@@ -14,7 +15,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ApolloProvider client={apolloClient}>
       <SaasProvider linkComponent={NextLink}>
-        {children}
+        <ConstantsProvider>
+          {children}
+        </ConstantsProvider>
       </SaasProvider>
     </ApolloProvider>
   );

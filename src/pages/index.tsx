@@ -1,15 +1,14 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import { useGetMonstersQuery } from '@/gql'
+
+import { Box, Container } from '@chakra-ui/react'
+import { AppShell, Sidebar, SidebarSection, NavItem } from '@saas-ui/react';
+import { AddMonster } from '@/components/addMonster';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const { loading, data, error } = useGetMonstersQuery();
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
 
   return (
     <>
@@ -19,9 +18,27 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <p>{data?.monsters.length}</p>
-      </main>
+      <Container w={'100vw'} h={'100vh'}>
+
+
+        <AppShell
+          navbar={
+            <Box as="header" borderBottomWidth="1px" py="2" px="4">
+              Logo
+            </Box>
+          }
+          sidebar={
+            <Sidebar>
+              <SidebarSection>
+                <NavItem>Home</NavItem>
+                <NavItem>Settings</NavItem>
+              </SidebarSection>
+            </Sidebar>
+          }
+        >
+          <AddMonster />
+        </AppShell>
+      </Container>
     </>
   )
 }

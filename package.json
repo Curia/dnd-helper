@@ -16,6 +16,8 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@saas-ui-pro/react": "^0.23.0",
+    "@saas-ui/command-bar": "^0.2.0",
+    "@saas-ui/nprogress": "^2.0.0",
     "@saas-ui/react": "^2.0.1",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
@@ -26,7 +28,8 @@
     "graphql": "^16.7.1",
     "next": "13.4.7",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.10.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "4.0.1",
