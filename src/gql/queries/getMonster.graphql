@@ -1,0 +1,12 @@
+query getMonster($monsterIndex: String) {
+  monster(index: $monsterIndex) {
+    name
+    armor_class {
+      value
+    }
+    hit_points
+    hit_dice
+    hit_points_roll
+    index
+  }
+}

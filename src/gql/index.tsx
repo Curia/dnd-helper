@@ -2072,6 +2072,13 @@ export type WizardSpecific = {
   arcane_recovery_levels: Scalars['Int']['output'];
 };
 
+export type GetMonsterQueryVariables = Exact<{
+  monsterIndex?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetMonsterQuery = { __typename?: 'Query', monster?: { __typename?: 'Monster', name: string, hit_points: number, hit_dice: string, hit_points_roll: string, index: string, armor_class?: Array<{ __typename?: 'MonsterArmorClass', value: number } | null> | null } | null };
+
 export type GetMonstersQueryVariables = Exact<{
   limit: Scalars['Int']['input'];
 }>;
@@ -2080,6 +2087,48 @@ export type GetMonstersQueryVariables = Exact<{
 export type GetMonstersQuery = { __typename?: 'Query', monsters?: Array<{ __typename?: 'Monster', name: string, index: string }> | null };
 
 
+export const GetMonsterDocument = gql`
+    query getMonster($monsterIndex: String) {
+  monster(index: $monsterIndex) {
+    name
+    armor_class {
+      value
+    }
+    hit_points
+    hit_dice
+    hit_points_roll
+    index
+  }
+}
+    `;
+
+/**
+ * __useGetMonsterQuery__
+ *
+ * To run a query within a React component, call `useGetMonsterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMonsterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMonsterQuery({
+ *   variables: {
+ *      monsterIndex: // value for 'monsterIndex'
+ *   },
+ * });
+ */
+export function useGetMonsterQuery(baseOptions?: Apollo.QueryHookOptions<GetMonsterQuery, GetMonsterQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMonsterQuery, GetMonsterQueryVariables>(GetMonsterDocument, options);
+      }
+export function useGetMonsterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMonsterQuery, GetMonsterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMonsterQuery, GetMonsterQueryVariables>(GetMonsterDocument, options);
+        }
+export type GetMonsterQueryHookResult = ReturnType<typeof useGetMonsterQuery>;
+export type GetMonsterLazyQueryHookResult = ReturnType<typeof useGetMonsterLazyQuery>;
+export type GetMonsterQueryResult = Apollo.QueryResult<GetMonsterQuery, GetMonsterQueryVariables>;
 export const GetMonstersDocument = gql`
     query getMonsters($limit: Int!) {
   monsters(limit: $limit) {

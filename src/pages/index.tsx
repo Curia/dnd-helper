@@ -2,8 +2,9 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 
 import { Box, Container } from '@chakra-ui/react'
-import { AppShell, Sidebar, SidebarSection, NavItem } from '@saas-ui/react';
+import { AppShell } from '@saas-ui/react';
 import { AddMonster } from '@/components/addMonster';
+import { ListMonsters } from '@/components/listMonsters';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,16 +28,9 @@ export default function Home() {
               Logo
             </Box>
           }
-          sidebar={
-            <Sidebar>
-              <SidebarSection>
-                <NavItem>Home</NavItem>
-                <NavItem>Settings</NavItem>
-              </SidebarSection>
-            </Sidebar>
-          }
         >
           <AddMonster />
+          <ListMonsters />
         </AppShell>
       </Container>
     </>

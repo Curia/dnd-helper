@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Button, Center, useDisclosure } from "@chakra-ui/react";
 import {
@@ -7,63 +7,40 @@ import {
   CommandBarContent,
   CommandBarInput,
   CommandBarList,
-  CommandBarGroup,
   CommandBarItem,
-  CommandBarSeparator,
   CommandBarLoading,
   CommandBarEmpty,
 } from '@saas-ui/command-bar';
-import {
-  FiUserCheck,
-  FiUser,
-  FiCircle,
-  FiBarChart,
-  FiTag,
-  FiCalendar,
-} from 'react-icons/fi';
-import { ConstantsContext, useGetConstants } from "../appProvider/constantsProvider";
+import { useGetConstants } from "../appProvider/constantsProvider";
+import { useGetMonsterLazyQuery } from "@/gql";
+import { MonsterActions, MonsterContext } from "../appProvider/monsterProvider";
 
-const items = [
-  {
-    icon: <FiUserCheck />,
-    label: 'Assign to...',
-    shortcut: 'A',
-  },
-  {
-    icon: <FiUser />,
-    label: 'Assign to me',
-    shortcut: 'I',
-  },
-  {
-    icon: <FiCircle />,
-    label: 'Change status...',
-    shortcut: 'S',
-  },
-  {
-    icon: <FiTag />,
-    label: 'Change labels...',
-    shortcut: 'L',
-  },
-  {
-    icon: <FiTag />,
-    label: 'Remove label...',
-    shortcut: '⇧ L',
-  },
-]
 
 export const AddMonster: React.FC = ({ }) => {
+  const { dispatch } = useContext(MonsterContext);
   const { isOpen, onClose, onToggle } = useDisclosure();
-  const [isLoading, setLoading] = React.useState(false);
-
   const { monsters } = useGetConstants();
+
+  const [getMonster, { loading }] = useGetMonsterLazyQuery();
+
+  const addMonster = (monsterIndex: string) => {
+    getMonster({ variables: { monsterIndex: monsterIndex } }).then((response) => {
+      if (response.data?.monster) {
+        dispatch({ type: MonsterActions.ADD_MONSTER, payload: response.data?.monster });
+      }
+
+    })
+  };
 
   return (
     <Center gap={'10px'} m={5}>
       <Button colorScheme='green' onClick={onToggle}>Add Monster</Button>
-      <Button colorScheme='red'>Remove All</Button>
+      <Button colorScheme='red' onClick={() => dispatch({ type: MonsterActions.CLEAR_MONSTERS, })}>Remove All</Button>
 
       <CommandBar
-        onChange={(value) => console.log(value)}
+        onSelect={(value) => {
+          addMonster(value);
+        }}
         isOpen={isOpen}
         onClose={onClose}
         closeOnSelect
@@ -76,13 +53,13 @@ export const AddMonster: React.FC = ({ }) => {
             />
 
             <CommandBarList>
-              {isLoading && <CommandBarLoading>Hang on…</CommandBarLoading>}
+              {loading && <CommandBarLoading>Hang on…</CommandBarLoading>}
 
               <CommandBarEmpty>No results found.</CommandBarEmpty>
 
               {monsters?.map(({ name, index }) => {
                 return (
-                  <CommandBarItem key={index} value={name}>
+                  <CommandBarItem key={index} value={index}>
                     {name}
                   </CommandBarItem>
                 )
