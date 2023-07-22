@@ -1,16 +1,12 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
+import React from 'react';
+import Head from 'next/head';
 
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react';
 import { AppShell } from '@saas-ui/react';
 import { AddMonster } from '@/components/addMonster';
 import { ListMonsters } from '@/components/listMonsters';
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
-
-
   return (
     <>
       <Head>
@@ -20,8 +16,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container w={'100vw'} h={'100vh'}>
-
-
         <AppShell
           navbar={
             <Box as="header" borderBottomWidth="1px" py="2" px="4">
@@ -34,5 +28,5 @@ export default function Home() {
         </AppShell>
       </Container>
     </>
-  )
+  );
 }

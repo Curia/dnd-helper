@@ -1,11 +1,44 @@
-import React, { useContext } from "react";
-import { MonsterContext } from "../appProvider/monsterProvider";
+import React, { useContext } from 'react';
 
-export const ListMonsters: React.FC = ({ }) => {
+// Contexts
+import { MonsterContext } from '../appProvider/monsterProvider';
 
-  const { state: { monsters } } = useContext(MonsterContext);
+// Components
+import { Card, CardBody, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 
-  return (<ul>
-    {monsters.map(monster => <li>{monster.name}</li>)}
-  </ul>)
-}
+// Types
+import type { Monster } from '@/gql';
+
+export const MonsterCard: React.FC<{ monster: Partial<Monster> }> = ({
+  monster,
+}) => {
+  return (
+    <Card
+      direction={{ base: 'column', sm: 'row' }}
+      overflow="hidden"
+      variant="outline"
+    >
+      <CardBody>
+        <Heading size="md">{monster.name}</Heading>
+        <Text>{monster.hit_points}</Text>
+      </CardBody>
+    </Card>
+  );
+};
+
+export const ListMonsters: React.FC<undefined> = () => {
+  const {
+    state: { monsters },
+  } = useContext(MonsterContext);
+
+  return (
+
+    <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+
+
+      {monsters.map((monster, index) => (
+        <MonsterCard monster={monster} key={index} />
+      ))}
+    </SimpleGrid>
+  );
+};

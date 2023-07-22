@@ -2,30 +2,43 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  ActionCount: { input: any; output: any; }
-  AreaOfEffectTypeFilter: { input: any; output: any; }
-  FloatFilter: { input: any; output: any; }
-  IntFilter: { input: any; output: any; }
-  LanguageScriptFilter: { input: any; output: any; }
-  MonsterSubtypeFilter: { input: any; output: any; }
-  MonsterTypeFilter: { input: any; output: any; }
-  ProficiencyTypeFilter: { input: any; output: any; }
-  SizeFilter: { input: any; output: any; }
-  SpellAttackTypeFilter: { input: any; output: any; }
-  StringFilter: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  ActionCount: { input: any; output: any };
+  AreaOfEffectTypeFilter: { input: any; output: any };
+  FloatFilter: { input: any; output: any };
+  IntFilter: { input: any; output: any };
+  LanguageScriptFilter: { input: any; output: any };
+  MonsterSubtypeFilter: { input: any; output: any };
+  MonsterTypeFilter: { input: any; output: any };
+  ProficiencyTypeFilter: { input: any; output: any };
+  SizeFilter: { input: any; output: any };
+  SpellAttackTypeFilter: { input: any; output: any };
+  StringFilter: { input: any; output: any };
 };
 
 export type AbilityBonus = {
@@ -62,7 +75,6 @@ export type AbilityScore = {
   name: Scalars['String']['output'];
   skills: Array<Skill>;
 };
-
 
 export type AbilityScoreSkillsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -115,17 +127,19 @@ export type Alignment = {
   name: Scalars['String']['output'];
 };
 
-export type Ammunition = IEquipment & IEquipmentBase & IGear & {
-  __typename?: 'Ammunition';
-  cost: Cost;
-  desc?: Maybe<Array<Scalars['String']['output']>>;
-  equipment_category: EquipmentCategory;
-  gear_category: EquipmentCategory;
-  index: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  quantity: Scalars['Int']['output'];
-  weight?: Maybe<Scalars['Float']['output']>;
-};
+export type Ammunition = IEquipment &
+  IEquipmentBase &
+  IGear & {
+    __typename?: 'Ammunition';
+    cost: Cost;
+    desc?: Maybe<Array<Scalars['String']['output']>>;
+    equipment_category: EquipmentCategory;
+    gear_category: EquipmentCategory;
+    index: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    quantity: Scalars['Int']['output'];
+    weight?: Maybe<Scalars['Float']['output']>;
+  };
 
 export type AreaOfEffect = {
   __typename?: 'AreaOfEffect';
@@ -143,22 +157,23 @@ export enum AreaOfEffectType {
   Cube = 'CUBE',
   Cylinder = 'CYLINDER',
   Line = 'LINE',
-  Sphere = 'SPHERE'
+  Sphere = 'SPHERE',
 }
 
-export type Armor = IEquipment & IEquipmentBase & {
-  __typename?: 'Armor';
-  armor_category: EquipmentCategory;
-  armor_class: ArmorClass;
-  cost: Cost;
-  desc?: Maybe<Array<Scalars['String']['output']>>;
-  equipment_category: EquipmentCategory;
-  index: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  stealth_disadvantage: Scalars['Boolean']['output'];
-  str_minimum: Scalars['Int']['output'];
-  weight?: Maybe<Scalars['Float']['output']>;
-};
+export type Armor = IEquipment &
+  IEquipmentBase & {
+    __typename?: 'Armor';
+    armor_category: EquipmentCategory;
+    armor_class: ArmorClass;
+    cost: Cost;
+    desc?: Maybe<Array<Scalars['String']['output']>>;
+    equipment_category: EquipmentCategory;
+    index: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    stealth_disadvantage: Scalars['Boolean']['output'];
+    str_minimum: Scalars['Int']['output'];
+    weight?: Maybe<Scalars['Float']['output']>;
+  };
 
 export type ArmorClass = {
   __typename?: 'ArmorClass';
@@ -189,11 +204,9 @@ export type Background = {
   starting_proficiencies: Array<Proficiency>;
 };
 
-
 export type BackgroundStarting_EquipmentArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type BackgroundStarting_ProficienciesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -287,11 +300,9 @@ export type Class = {
   subclasses: Array<Subclass>;
 };
 
-
 export type ClassProficienciesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type ClassSpellsArgs = {
   area_of_effect?: InputMaybe<AreaOfEffectFilter>;
@@ -311,7 +322,6 @@ export type ClassSpellsArgs = {
   subclass?: InputMaybe<Scalars['StringFilter']['input']>;
 };
 
-
 export type ClassSubclassesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
@@ -324,10 +334,22 @@ export type ClassOrder = {
 
 export enum ClassOrderBy {
   HitDie = 'HIT_DIE',
-  Name = 'NAME'
+  Name = 'NAME',
 }
 
-export type ClassSpecific = BarbarianSpecific | BardSpecific | ClericSpecific | DruidSpecific | FighterSpecific | MonkSpecific | PaladinSpecific | RangerSpecific | RogueSpecific | SorcererSpecific | WarlockSpecific | WizardSpecific;
+export type ClassSpecific =
+  | BarbarianSpecific
+  | BardSpecific
+  | ClericSpecific
+  | DruidSpecific
+  | FighterSpecific
+  | MonkSpecific
+  | PaladinSpecific
+  | RangerSpecific
+  | RogueSpecific
+  | SorcererSpecific
+  | WarlockSpecific
+  | WizardSpecific;
 
 export type ClassSpellcasting = {
   __typename?: 'ClassSpellcasting';
@@ -366,7 +388,7 @@ export type CountedReferenceOption = {
 export enum Currency {
   Cp = 'CP',
   Gp = 'GP',
-  Sp = 'SP'
+  Sp = 'SP',
 }
 
 export type Damage = {
@@ -405,7 +427,7 @@ export type DamageType = {
 export enum DcSuccess {
   Half = 'HALF',
   None = 'NONE',
-  Other = 'OTHER'
+  Other = 'OTHER',
 }
 
 export type DevotionSpecific = {
@@ -432,7 +454,6 @@ export type EquipmentCategory = {
   index: Scalars['String']['output'];
   name: Scalars['String']['output'];
 };
-
 
 export type EquipmentCategoryEquipmentArgs = {
   limit?: Scalars['Int']['input'];
@@ -468,10 +489,12 @@ export type EquipmentCategoryOrder = {
 
 export enum EquipmentCategoryOrderBy {
   Name = 'NAME',
-  Weight = 'WEIGHT'
+  Weight = 'WEIGHT',
 }
 
-export type EquipmentMultipleItem = CountedReferenceOption | EquipmentCategoryChoiceOption;
+export type EquipmentMultipleItem =
+  | CountedReferenceOption
+  | EquipmentCategoryChoiceOption;
 
 export type EquipmentMultipleOption = {
   __typename?: 'EquipmentMultipleOption';
@@ -479,7 +502,10 @@ export type EquipmentMultipleOption = {
   option_type: Scalars['String']['output'];
 };
 
-export type EquipmentOption = CountedReferenceOption | EquipmentCategoryChoiceOption | EquipmentMultipleOption;
+export type EquipmentOption =
+  | CountedReferenceOption
+  | EquipmentCategoryChoiceOption
+  | EquipmentMultipleOption;
 
 export type EquipmentOptionSet = {
   __typename?: 'EquipmentOptionSet';
@@ -496,7 +522,7 @@ export type EquipmentOrder = {
 export enum EquipmentOrderBy {
   EquipmentCategory = 'EQUIPMENT_CATEGORY',
   Name = 'NAME',
-  Weight = 'WEIGHT'
+  Weight = 'WEIGHT',
 }
 
 export type ExpertiseChoice = {
@@ -512,7 +538,10 @@ export type ExpertiseMultipleOption = {
   option_type: Scalars['String']['output'];
 };
 
-export type ExpertiseOption = ExpertiseMultipleOption | ProficiencyChoiceOption | ProficiencyReferenceOption;
+export type ExpertiseOption =
+  | ExpertiseMultipleOption
+  | ProficiencyChoiceOption
+  | ProficiencyReferenceOption;
 
 export type ExpertiseOptionSet = {
   __typename?: 'ExpertiseOptionSet';
@@ -571,7 +600,7 @@ export enum FeatureOrderBy {
   Class = 'CLASS',
   Level = 'LEVEL',
   Name = 'NAME',
-  Subclass = 'SUBCLASS'
+  Subclass = 'SUBCLASS',
 }
 
 export type FeaturePrerequisite = {
@@ -596,16 +625,18 @@ export type FighterSpecific = {
   indomitable_uses: Scalars['Int']['output'];
 };
 
-export type Gear = IEquipment & IEquipmentBase & IGear & {
-  __typename?: 'Gear';
-  cost: Cost;
-  desc?: Maybe<Array<Scalars['String']['output']>>;
-  equipment_category: EquipmentCategory;
-  gear_category: EquipmentCategory;
-  index: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  weight?: Maybe<Scalars['Float']['output']>;
-};
+export type Gear = IEquipment &
+  IEquipmentBase &
+  IGear & {
+    __typename?: 'Gear';
+    cost: Cost;
+    desc?: Maybe<Array<Scalars['String']['output']>>;
+    equipment_category: EquipmentCategory;
+    gear_category: EquipmentCategory;
+    index: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    weight?: Maybe<Scalars['Float']['output']>;
+  };
 
 export type HealingAtLevel = {
   __typename?: 'HealingAtLevel';
@@ -697,7 +728,7 @@ export type LanguageOrder = {
 export enum LanguageOrderBy {
   Name = 'NAME',
   Script = 'SCRIPT',
-  Type = 'TYPE'
+  Type = 'TYPE',
 }
 
 export enum LanguageScript {
@@ -706,12 +737,12 @@ export enum LanguageScript {
   Draconic = 'DRACONIC',
   Dwarvish = 'DWARVISH',
   Elvish = 'ELVISH',
-  Infernal = 'INFERNAL'
+  Infernal = 'INFERNAL',
 }
 
 export enum LanguageType {
   Exotic = 'EXOTIC',
-  Standard = 'STANDARD'
+  Standard = 'STANDARD',
 }
 
 export type LegendaryAction = {
@@ -736,7 +767,6 @@ export type Level = {
   subclass_specific?: Maybe<SubclassSpecific>;
 };
 
-
 export type LevelFeaturesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
@@ -753,7 +783,7 @@ export enum LevelOrderBy {
   Class = 'CLASS',
   Level = 'LEVEL',
   ProfBonus = 'PROF_BONUS',
-  Subclass = 'SUBCLASS'
+  Subclass = 'SUBCLASS',
 }
 
 export type LevelSpellcasting = {
@@ -793,7 +823,7 @@ export type MagicItemOrder = {
 
 export enum MagicItemOrderBy {
   EquipmentCategory = 'EQUIPMENT_CATEGORY',
-  Name = 'NAME'
+  Name = 'NAME',
 }
 
 export enum MagicItemRarity {
@@ -803,7 +833,7 @@ export enum MagicItemRarity {
   Rare = 'RARE',
   Uncommon = 'UNCOMMON',
   Varies = 'VARIES',
-  VeryRare = 'VERY_RARE'
+  VeryRare = 'VERY_RARE',
 }
 
 export type MagicSchool = {
@@ -813,7 +843,6 @@ export type MagicSchool = {
   name: Scalars['String']['output'];
   spells: Array<Spell>;
 };
-
 
 export type MagicSchoolSpellsArgs = {
   area_of_effect?: InputMaybe<AreaOfEffectFilter>;
@@ -921,7 +950,7 @@ export enum MonsterArmorClassType {
   Condition = 'condition',
   Dex = 'dex',
   Natural = 'natural',
-  Spell = 'spell'
+  Spell = 'spell',
 }
 
 export type MonsterOrder = {
@@ -943,7 +972,7 @@ export enum MonsterOrderBy {
   Subtype = 'SUBTYPE',
   Type = 'TYPE',
   Wisdom = 'WISDOM',
-  Xp = 'XP'
+  Xp = 'XP',
 }
 
 export type MonsterProficiency = {
@@ -1003,7 +1032,7 @@ export enum MonsterSubtype {
   Orc = 'ORC',
   Sahuagin = 'SAHUAGIN',
   Shapechanger = 'SHAPECHANGER',
-  Titan = 'TITAN'
+  Titan = 'TITAN',
 }
 
 export enum MonsterType {
@@ -1021,7 +1050,7 @@ export enum MonsterType {
   Ooze = 'OOZE',
   Plant = 'PLANT',
   Swarm = 'SWARM',
-  Undead = 'UNDEAD'
+  Undead = 'UNDEAD',
 }
 
 export type Multiclassing = {
@@ -1040,20 +1069,22 @@ export type MultipleActionOption = {
 
 export enum OrderByDirection {
   Ascending = 'ASCENDING',
-  Descending = 'DESCENDING'
+  Descending = 'DESCENDING',
 }
 
-export type Pack = IEquipment & IEquipmentBase & IGear & {
-  __typename?: 'Pack';
-  contents: Array<PackQuantity>;
-  cost: Cost;
-  desc?: Maybe<Array<Scalars['String']['output']>>;
-  equipment_category: EquipmentCategory;
-  gear_category: EquipmentCategory;
-  index: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  weight?: Maybe<Scalars['Float']['output']>;
-};
+export type Pack = IEquipment &
+  IEquipmentBase &
+  IGear & {
+    __typename?: 'Pack';
+    contents: Array<PackQuantity>;
+    cost: Cost;
+    desc?: Maybe<Array<Scalars['String']['output']>>;
+    equipment_category: EquipmentCategory;
+    gear_category: EquipmentCategory;
+    index: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    weight?: Maybe<Scalars['Float']['output']>;
+  };
 
 export type PackQuantity = {
   __typename?: 'PackQuantity';
@@ -1096,11 +1127,9 @@ export type Proficiency = {
   type: ProficiencyType;
 };
 
-
 export type ProficiencyClassesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type ProficiencyRacesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1120,7 +1149,9 @@ export type ProficiencyChoiceOption = {
   option_type: Scalars['String']['output'];
 };
 
-export type ProficiencyOption = ProficiencyChoiceOption | ProficiencyReferenceOption;
+export type ProficiencyOption =
+  | ProficiencyChoiceOption
+  | ProficiencyReferenceOption;
 
 export type ProficiencyOptionSet = {
   __typename?: 'ProficiencyOptionSet';
@@ -1136,7 +1167,7 @@ export type ProficiencyOrder = {
 
 export enum ProficiencyOrderBy {
   Name = 'NAME',
-  Type = 'TYPE'
+  Type = 'TYPE',
 }
 
 export type ProficiencyPrerequisite = {
@@ -1151,7 +1182,17 @@ export type ProficiencyRace = {
   name: Scalars['String']['output'];
 };
 
-export type ProficiencyReference = AbilityScore | Ammunition | Armor | EquipmentCategory | Gear | Pack | Skill | Tool | Vehicle | Weapon;
+export type ProficiencyReference =
+  | AbilityScore
+  | Ammunition
+  | Armor
+  | EquipmentCategory
+  | Gear
+  | Pack
+  | Skill
+  | Tool
+  | Vehicle
+  | Weapon;
 
 export type ProficiencyReferenceOption = {
   __typename?: 'ProficiencyReferenceOption';
@@ -1168,7 +1209,7 @@ export enum ProficiencyType {
   SavingThrows = 'SAVING_THROWS',
   Skills = 'SKILLS',
   Vehicles = 'VEHICLES',
-  Weapons = 'WEAPONS'
+  Weapons = 'WEAPONS',
 }
 
 export type Quantity = {
@@ -1231,11 +1272,9 @@ export type Query = {
   weaponProperty?: Maybe<WeaponProperty>;
 };
 
-
 export type QueryAbilityScoreArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryAbilityScoresArgs = {
   full_name?: InputMaybe<Scalars['String']['input']>;
@@ -1243,33 +1282,27 @@ export type QueryAbilityScoresArgs = {
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryAlignmentArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryAlignmentsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryBackgroundArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryBackgroundsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryClassArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryClassesArgs = {
   hit_die?: InputMaybe<Scalars['IntFilter']['input']>;
@@ -1277,44 +1310,36 @@ export type QueryClassesArgs = {
   order?: InputMaybe<ClassOrder>;
 };
 
-
 export type QueryConditionArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryConditionsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryDamageTypeArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryDamageTypesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryEquipmentArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryEquipmentCategoriesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryEquipmentCategoryArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryEquipmentsArgs = {
   equipment_category?: InputMaybe<Scalars['StringFilter']['input']>;
@@ -1324,22 +1349,18 @@ export type QueryEquipmentsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryFeatArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryFeatsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryFeatureArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryFeaturesArgs = {
   class?: InputMaybe<Scalars['StringFilter']['input']>;
@@ -1351,11 +1372,9 @@ export type QueryFeaturesArgs = {
   subclass?: InputMaybe<Scalars['StringFilter']['input']>;
 };
 
-
 export type QueryLanguageArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryLanguagesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1364,11 +1383,9 @@ export type QueryLanguagesArgs = {
   type?: InputMaybe<LanguageType>;
 };
 
-
 export type QueryLevelArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryLevelsArgs = {
   ability_score_bonuses?: InputMaybe<Scalars['IntFilter']['input']>;
@@ -1381,11 +1398,9 @@ export type QueryLevelsArgs = {
   subclass?: InputMaybe<Scalars['StringFilter']['input']>;
 };
 
-
 export type QueryMagicItemArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryMagicItemsArgs = {
   equipment_category?: InputMaybe<Scalars['StringFilter']['input']>;
@@ -1395,22 +1410,18 @@ export type QueryMagicItemsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-
 export type QueryMagicSchoolArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryMagicSchoolsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryMonsterArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryMonstersArgs = {
   armor_class?: InputMaybe<Scalars['IntFilter']['input']>;
@@ -1434,7 +1445,6 @@ export type QueryMonstersArgs = {
   xp?: InputMaybe<Scalars['IntFilter']['input']>;
 };
 
-
 export type QueryProficienciesArgs = {
   class?: InputMaybe<Scalars['StringFilter']['input']>;
   limit?: Scalars['Int']['input'];
@@ -1445,16 +1455,13 @@ export type QueryProficienciesArgs = {
   type?: InputMaybe<Scalars['ProficiencyTypeFilter']['input']>;
 };
 
-
 export type QueryProficiencyArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryRaceArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryRacesArgs = {
   ability_bonus?: InputMaybe<Scalars['StringFilter']['input']>;
@@ -1465,33 +1472,27 @@ export type QueryRacesArgs = {
   speed?: InputMaybe<Scalars['IntFilter']['input']>;
 };
 
-
 export type QueryRuleArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type QueryRuleSectionArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryRuleSectionsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryRulesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QuerySkillArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QuerySkillsArgs = {
   ability_score?: InputMaybe<Scalars['StringFilter']['input']>;
@@ -1499,11 +1500,9 @@ export type QuerySkillsArgs = {
   order?: InputMaybe<SkillOrder>;
 };
 
-
 export type QuerySpellArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QuerySpellsArgs = {
   area_of_effect?: InputMaybe<AreaOfEffectFilter>;
@@ -1524,45 +1523,37 @@ export type QuerySpellsArgs = {
   subclass?: InputMaybe<Scalars['StringFilter']['input']>;
 };
 
-
 export type QuerySubclassArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QuerySubclassesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QuerySubraceArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QuerySubracesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryTraitArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type QueryTraitsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
 
-
 export type QueryWeaponPropertiesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
   order_direction?: InputMaybe<OrderByDirection>;
 };
-
 
 export type QueryWeaponPropertyArgs = {
   index?: InputMaybe<Scalars['String']['input']>;
@@ -1588,21 +1579,17 @@ export type Race = ProficiencyRace & {
   traits: Array<Trait>;
 };
 
-
 export type RaceLanguagesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type RaceStarting_ProficienciesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type RaceSubracesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type RaceTraitsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1617,7 +1604,7 @@ export type RaceOrder = {
 export enum RaceOrderBy {
   Name = 'NAME',
   Size = 'SIZE',
-  Speed = 'SPEED'
+  Speed = 'SPEED',
 }
 
 export type Range = {
@@ -1641,7 +1628,7 @@ export type Reaction = {
 
 export enum RestType {
   Long = 'LONG',
-  Short = 'SHORT'
+  Short = 'SHORT',
 }
 
 export type RogueSpecific = {
@@ -1656,7 +1643,6 @@ export type Rule = {
   name: Scalars['String']['output'];
   subsections: Array<RuleSection>;
 };
-
 
 export type RuleSubsectionsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1684,7 +1670,7 @@ export enum Size {
   Large = 'LARGE',
   Medium = 'MEDIUM',
   Small = 'SMALL',
-  Tiny = 'TINY'
+  Tiny = 'TINY',
 }
 
 export type Skill = {
@@ -1703,7 +1689,7 @@ export type SkillOrder = {
 
 export enum SkillOrderBy {
   AbilityScore = 'ABILITY_SCORE',
-  Name = 'NAME'
+  Name = 'NAME',
 }
 
 export type SorcererSpecific = {
@@ -1753,11 +1739,9 @@ export type Spell = {
   subclasses: Array<Subclass>;
 };
 
-
 export type SpellClassesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type SpellSubclassesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -1765,7 +1749,7 @@ export type SpellSubclassesArgs = {
 
 export enum SpellAttackType {
   Melee = 'MELEE',
-  Ranged = 'RANGED'
+  Ranged = 'RANGED',
 }
 
 export type SpellChoice = {
@@ -1778,7 +1762,7 @@ export type SpellChoice = {
 export enum SpellComponent {
   M = 'M',
   S = 'S',
-  V = 'V'
+  V = 'V',
 }
 
 export type SpellDamage = {
@@ -1819,7 +1803,7 @@ export enum SpellOrderBy {
   Level = 'LEVEL',
   Name = 'NAME',
   Ritual = 'RITUAL',
-  School = 'SCHOOL'
+  School = 'SCHOOL',
 }
 
 export type SpellPrerequisite = Feature | Level;
@@ -1850,7 +1834,9 @@ export type StartingEquipmentChoice = {
   type: Scalars['String']['output'];
 };
 
-export type StartingEquipmentOptionSet = EquipmentCategoryOptionSet | EquipmentOptionSet;
+export type StartingEquipmentOptionSet =
+  | EquipmentCategoryOptionSet
+  | EquipmentOptionSet;
 
 export type StringChoice = {
   __typename?: 'StringChoice';
@@ -1881,7 +1867,6 @@ export type Subclass = {
   subclass_flavor: Scalars['String']['output'];
   subclass_levels: Array<Maybe<Level>>;
 };
-
 
 export type SubclassSpellsArgs = {
   area_of_effect?: InputMaybe<AreaOfEffectFilter>;
@@ -1915,26 +1900,25 @@ export type Subrace = ProficiencyRace & {
   starting_proficiencies: Array<Proficiency>;
 };
 
-
 export type SubraceRacial_TraitsArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type SubraceStarting_ProficienciesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Tool = IEquipment & IEquipmentBase & {
-  __typename?: 'Tool';
-  cost: Cost;
-  desc?: Maybe<Array<Scalars['String']['output']>>;
-  equipment_category: EquipmentCategory;
-  index: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  tool_category: EquipmentCategory;
-  weight?: Maybe<Scalars['Float']['output']>;
-};
+export type Tool = IEquipment &
+  IEquipmentBase & {
+    __typename?: 'Tool';
+    cost: Cost;
+    desc?: Maybe<Array<Scalars['String']['output']>>;
+    equipment_category: EquipmentCategory;
+    index: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    tool_category: EquipmentCategory;
+    weight?: Maybe<Scalars['Float']['output']>;
+  };
 
 export type Trait = {
   __typename?: 'Trait';
@@ -1950,16 +1934,13 @@ export type Trait = {
   trait_specific?: Maybe<TraitSpecific>;
 };
 
-
 export type TraitProficienciesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 export type TraitRacesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 export type TraitSubracesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -2006,21 +1987,22 @@ export enum UsageType {
   PerDay = 'PER_DAY',
   PerRest = 'PER_REST',
   RechargeAfterRest = 'RECHARGE_AFTER_REST',
-  RechargeOnRoll = 'RECHARGE_ON_ROLL'
+  RechargeOnRoll = 'RECHARGE_ON_ROLL',
 }
 
-export type Vehicle = IEquipment & IEquipmentBase & {
-  __typename?: 'Vehicle';
-  capacity?: Maybe<Scalars['String']['output']>;
-  cost: Cost;
-  desc?: Maybe<Array<Scalars['String']['output']>>;
-  equipment_category: EquipmentCategory;
-  index: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  speed?: Maybe<Speed>;
-  vehicle_category: EquipmentCategory;
-  weight?: Maybe<Scalars['Float']['output']>;
-};
+export type Vehicle = IEquipment &
+  IEquipmentBase & {
+    __typename?: 'Vehicle';
+    capacity?: Maybe<Scalars['String']['output']>;
+    cost: Cost;
+    desc?: Maybe<Array<Scalars['String']['output']>>;
+    equipment_category: EquipmentCategory;
+    index: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    speed?: Maybe<Speed>;
+    vehicle_category: EquipmentCategory;
+    weight?: Maybe<Scalars['Float']['output']>;
+  };
 
 export type WarlockSpecific = {
   __typename?: 'WarlockSpecific';
@@ -2031,25 +2013,25 @@ export type WarlockSpecific = {
   mystic_arcanum_level_9: Scalars['Int']['output'];
 };
 
-export type Weapon = IEquipment & IEquipmentBase & {
-  __typename?: 'Weapon';
-  category_range: EquipmentCategory;
-  cost: Cost;
-  damage?: Maybe<Damage>;
-  desc?: Maybe<Array<Scalars['String']['output']>>;
-  equipment_category: EquipmentCategory;
-  index: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  properties: Array<WeaponProperty>;
-  range: Range;
-  special?: Maybe<Array<Scalars['String']['output']>>;
-  throw_range?: Maybe<Range>;
-  two_handed_damage?: Maybe<Damage>;
-  weapon_category: EquipmentCategory;
-  weapon_range: WeaponRange;
-  weight?: Maybe<Scalars['Float']['output']>;
-};
-
+export type Weapon = IEquipment &
+  IEquipmentBase & {
+    __typename?: 'Weapon';
+    category_range: EquipmentCategory;
+    cost: Cost;
+    damage?: Maybe<Damage>;
+    desc?: Maybe<Array<Scalars['String']['output']>>;
+    equipment_category: EquipmentCategory;
+    index: Scalars['String']['output'];
+    name: Scalars['String']['output'];
+    properties: Array<WeaponProperty>;
+    range: Range;
+    special?: Maybe<Array<Scalars['String']['output']>>;
+    throw_range?: Maybe<Range>;
+    two_handed_damage?: Maybe<Damage>;
+    weapon_category: EquipmentCategory;
+    weapon_range: WeaponRange;
+    weight?: Maybe<Scalars['Float']['output']>;
+  };
 
 export type WeaponPropertiesArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
@@ -2064,7 +2046,7 @@ export type WeaponProperty = {
 
 export enum WeaponRange {
   Melee = 'MELEE',
-  Ranged = 'RANGED'
+  Ranged = 'RANGED',
 }
 
 export type WizardSpecific = {
@@ -2076,31 +2058,49 @@ export type GetMonsterQueryVariables = Exact<{
   monsterIndex?: InputMaybe<Scalars['String']['input']>;
 }>;
 
-
-export type GetMonsterQuery = { __typename?: 'Query', monster?: { __typename?: 'Monster', name: string, hit_points: number, hit_dice: string, hit_points_roll: string, index: string, armor_class?: Array<{ __typename?: 'MonsterArmorClass', value: number } | null> | null } | null };
+export type GetMonsterQuery = {
+  __typename?: 'Query';
+  monster?: {
+    __typename?: 'Monster';
+    name: string;
+    hit_points: number;
+    hit_dice: string;
+    hit_points_roll: string;
+    index: string;
+    armor_class?: Array<{
+      __typename?: 'MonsterArmorClass';
+      value: number;
+    } | null> | null;
+  } | null;
+};
 
 export type GetMonstersQueryVariables = Exact<{
   limit: Scalars['Int']['input'];
 }>;
 
-
-export type GetMonstersQuery = { __typename?: 'Query', monsters?: Array<{ __typename?: 'Monster', name: string, index: string }> | null };
-
+export type GetMonstersQuery = {
+  __typename?: 'Query';
+  monsters?: Array<{
+    __typename?: 'Monster';
+    name: string;
+    index: string;
+  }> | null;
+};
 
 export const GetMonsterDocument = gql`
-    query getMonster($monsterIndex: String) {
-  monster(index: $monsterIndex) {
-    name
-    armor_class {
-      value
+  query getMonster($monsterIndex: String) {
+    monster(index: $monsterIndex) {
+      name
+      armor_class {
+        value
+      }
+      hit_points
+      hit_dice
+      hit_points_roll
+      index
     }
-    hit_points
-    hit_dice
-    hit_points_roll
-    index
   }
-}
-    `;
+`;
 
 /**
  * __useGetMonsterQuery__
@@ -2118,25 +2118,46 @@ export const GetMonsterDocument = gql`
  *   },
  * });
  */
-export function useGetMonsterQuery(baseOptions?: Apollo.QueryHookOptions<GetMonsterQuery, GetMonsterQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetMonsterQuery, GetMonsterQueryVariables>(GetMonsterDocument, options);
-      }
-export function useGetMonsterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMonsterQuery, GetMonsterQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetMonsterQuery, GetMonsterQueryVariables>(GetMonsterDocument, options);
-        }
-export type GetMonsterQueryHookResult = ReturnType<typeof useGetMonsterQuery>;
-export type GetMonsterLazyQueryHookResult = ReturnType<typeof useGetMonsterLazyQuery>;
-export type GetMonsterQueryResult = Apollo.QueryResult<GetMonsterQuery, GetMonsterQueryVariables>;
-export const GetMonstersDocument = gql`
-    query getMonsters($limit: Int!) {
-  monsters(limit: $limit) {
-    name
-    index
-  }
+export function useGetMonsterQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetMonsterQuery,
+    GetMonsterQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetMonsterQuery, GetMonsterQueryVariables>(
+    GetMonsterDocument,
+    options,
+  );
 }
-    `;
+export function useGetMonsterLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetMonsterQuery,
+    GetMonsterQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetMonsterQuery, GetMonsterQueryVariables>(
+    GetMonsterDocument,
+    options,
+  );
+}
+export type GetMonsterQueryHookResult = ReturnType<typeof useGetMonsterQuery>;
+export type GetMonsterLazyQueryHookResult = ReturnType<
+  typeof useGetMonsterLazyQuery
+>;
+export type GetMonsterQueryResult = Apollo.QueryResult<
+  GetMonsterQuery,
+  GetMonsterQueryVariables
+>;
+export const GetMonstersDocument = gql`
+  query getMonsters($limit: Int!) {
+    monsters(limit: $limit) {
+      name
+      index
+    }
+  }
+`;
 
 /**
  * __useGetMonstersQuery__
@@ -2154,14 +2175,35 @@ export const GetMonstersDocument = gql`
  *   },
  * });
  */
-export function useGetMonstersQuery(baseOptions: Apollo.QueryHookOptions<GetMonstersQuery, GetMonstersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetMonstersQuery, GetMonstersQueryVariables>(GetMonstersDocument, options);
-      }
-export function useGetMonstersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMonstersQuery, GetMonstersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetMonstersQuery, GetMonstersQueryVariables>(GetMonstersDocument, options);
-        }
+export function useGetMonstersQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetMonstersQuery,
+    GetMonstersQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetMonstersQuery, GetMonstersQueryVariables>(
+    GetMonstersDocument,
+    options,
+  );
+}
+export function useGetMonstersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetMonstersQuery,
+    GetMonstersQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetMonstersQuery, GetMonstersQueryVariables>(
+    GetMonstersDocument,
+    options,
+  );
+}
 export type GetMonstersQueryHookResult = ReturnType<typeof useGetMonstersQuery>;
-export type GetMonstersLazyQueryHookResult = ReturnType<typeof useGetMonstersLazyQuery>;
-export type GetMonstersQueryResult = Apollo.QueryResult<GetMonstersQuery, GetMonstersQueryVariables>;
+export type GetMonstersLazyQueryHookResult = ReturnType<
+  typeof useGetMonstersLazyQuery
+>;
+export type GetMonstersQueryResult = Apollo.QueryResult<
+  GetMonstersQuery,
+  GetMonstersQueryVariables
+>;

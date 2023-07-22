@@ -10,13 +10,12 @@ import {
   CommandBarItem,
   CommandBarLoading,
   CommandBarEmpty,
-} from '@saas-ui/command-bar';
+} from "@saas-ui/command-bar";
 import { useGetConstants } from "../appProvider/constantsProvider";
 import { useGetMonsterLazyQuery } from "@/gql";
 import { MonsterActions, MonsterContext } from "../appProvider/monsterProvider";
 
-
-export const AddMonster: React.FC = ({ }) => {
+export const AddMonster: React.FC<undefined> = () => {
   const { dispatch } = useContext(MonsterContext);
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { monsters } = useGetConstants();
@@ -24,18 +23,29 @@ export const AddMonster: React.FC = ({ }) => {
   const [getMonster, { loading }] = useGetMonsterLazyQuery();
 
   const addMonster = (monsterIndex: string) => {
-    getMonster({ variables: { monsterIndex: monsterIndex } }).then((response) => {
-      if (response.data?.monster) {
-        dispatch({ type: MonsterActions.ADD_MONSTER, payload: response.data?.monster });
-      }
-
-    })
+    getMonster({ variables: { monsterIndex: monsterIndex } }).then(
+      (response) => {
+        if (response.data?.monster) {
+          dispatch({
+            type: MonsterActions.ADD_MONSTER,
+            payload: response.data?.monster,
+          });
+        }
+      },
+    );
   };
 
   return (
-    <Center gap={'10px'} m={5}>
-      <Button colorScheme='green' onClick={onToggle}>Add Monster</Button>
-      <Button colorScheme='red' onClick={() => dispatch({ type: MonsterActions.CLEAR_MONSTERS, })}>Remove All</Button>
+    <Center gap={"10px"} m={5}>
+      <Button colorScheme="green" onClick={onToggle}>
+        Add Monster
+      </Button>
+      <Button
+        colorScheme="red"
+        onClick={() => dispatch({ type: MonsterActions.CLEAR_MONSTERS })}
+      >
+        Remove All
+      </Button>
 
       <CommandBar
         onSelect={(value) => {
@@ -62,13 +72,12 @@ export const AddMonster: React.FC = ({ }) => {
                   <CommandBarItem key={index} value={index}>
                     {name}
                   </CommandBarItem>
-                )
+                );
               })}
             </CommandBarList>
           </CommandBarContent>
         </CommandBarDialog>
       </CommandBar>
     </Center>
-  )
-
-}
+  );
+};

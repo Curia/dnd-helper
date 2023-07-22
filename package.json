@@ -6,8 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write"
   },
   "dependencies": {
     "@apollo/client": "^3.7.16",
@@ -22,11 +24,14 @@
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
-    "eslint": "8.44.0",
     "eslint-config-next": "13.4.7",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "framer-motion": "^6",
     "graphql": "^16.7.1",
     "next": "13.4.7",
+    "prettier": "^3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1"
@@ -35,6 +40,10 @@
     "@graphql-codegen/cli": "4.0.1",
     "@graphql-codegen/client-preset": "4.0.1",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "8.45.0",
+    "eslint-plugin-react": "^7.33.0",
     "typescript": "5.1.6"
   }
 }
