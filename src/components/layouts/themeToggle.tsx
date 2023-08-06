@@ -7,21 +7,20 @@ import { useColorMode } from '@chakra-ui/react';
 import { Switch, Icon, HStack } from '@chakra-ui/react';
 
 // Icons
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 export const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <HStack spacing={'1'}>
-      <Icon as={FaSun} />
+      <Icon as={FiSun} />
       <Switch
         isChecked={colorMode === 'dark'}
         onChange={toggleColorMode}
         colorScheme="primary"
       />
-      <Icon as={FaMoon} />
+      <Icon as={FiMoon} />
     </HStack>
-
   );
 };

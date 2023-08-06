@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import { Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from '@chakra-ui/react';
 import {
   CommandBar,
   CommandBarDialog,
@@ -10,11 +10,11 @@ import {
   CommandBarItem,
   CommandBarLoading,
   CommandBarEmpty,
-} from "@saas-ui/command-bar";
-import { useGetConstants } from "../appProvider/constantsProvider";
-import { useGetMonsterLazyQuery } from "@/gql";
-import { MonsterActions, MonsterContext } from "../appProvider/monsterProvider";
-import { Toolbar, ToolbarButton } from "@saas-ui-pro/react";
+} from '@saas-ui/command-bar';
+import { useGetConstants } from '../appProvider/constantsProvider';
+import { useGetMonsterLazyQuery } from '@/gql';
+import { MonsterActions, MonsterContext } from '../appProvider/monsterProvider';
+import { Toolbar, ToolbarButton } from '@saas-ui-pro/react';
 
 export const AddMonster: React.FC = () => {
   const { dispatch } = useContext(MonsterContext);
@@ -38,10 +38,15 @@ export const AddMonster: React.FC = () => {
 
   return (
     <Toolbar>
-      <ToolbarButton label="Add Monster" variant="solid"
+      <ToolbarButton
+        label="Add Monster"
+        variant="solid"
         size="md"
-        colorScheme="primary" onClick={onToggle} />
-      <ToolbarButton label="Remove All"
+        colorScheme="primary"
+        onClick={onToggle}
+      />
+      <ToolbarButton
+        label="Remove All"
         variant="solid"
         size="md"
         colorScheme="primary"

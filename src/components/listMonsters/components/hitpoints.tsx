@@ -1,8 +1,16 @@
 import React, { useRef, useState } from 'react';
 
 // Components
-import { Button, Icon, Input, InputGroup, InputRightAddon, Flex, Text } from '@chakra-ui/react';
-import { PiHeartDuotone, PiPlusBold, PiMinusBold } from 'react-icons/pi'
+import {
+  Button,
+  Icon,
+  Input,
+  InputGroup,
+  InputRightAddon,
+  Flex,
+  Text,
+} from '@chakra-ui/react';
+import { PiHeartDuotone, PiPlusBold, PiMinusBold } from 'react-icons/pi';
 
 export const HitPoints: React.FC<{ baseHitPoints: number | undefined }> = ({
   baseHitPoints,
@@ -17,18 +25,34 @@ export const HitPoints: React.FC<{ baseHitPoints: number | undefined }> = ({
     } else {
       setHitPoints(hitPoints + -Math.abs(Number(value)));
     }
-  }
+  };
 
   return (
     <Flex alignItems={'center'} gap={'4'}>
-      <Text display={'flex'} alignItems={'center'} fontSize='2xl'><Icon as={PiHeartDuotone} mr={'2'} /> {hitPoints}</Text>
-      <InputGroup size='sm' maxW='50%' mt='1'>
+      <Text display={'flex'} alignItems={'center'} fontSize="2xl">
+        <Icon as={PiHeartDuotone} mr={'2'} /> {hitPoints}
+      </Text>
+      <InputGroup size="sm" maxW="50%" mt="1">
         <Input ref={inputRef} />
-        <InputRightAddon padding='0'>
-          <Button colorScheme='green' onClick={() => { handleClick(true) }} borderRadius='0' variant='outline'>
+        <InputRightAddon padding="0">
+          <Button
+            colorScheme="green"
+            onClick={() => {
+              handleClick(true);
+            }}
+            borderRadius="0"
+            variant="outline"
+          >
             <Icon as={PiPlusBold} />
           </Button>
-          <Button colorScheme='red' onClick={() => { handleClick(false) }} borderLeftRadius='0' variant='outline'>
+          <Button
+            colorScheme="red"
+            onClick={() => {
+              handleClick(false);
+            }}
+            borderLeftRadius="0"
+            variant="outline"
+          >
             <Icon as={PiMinusBold} />
           </Button>
         </InputRightAddon>

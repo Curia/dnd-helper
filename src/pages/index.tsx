@@ -7,7 +7,6 @@ import { ListMonsters } from '@/components/listMonsters';
 import { AppShell } from '@/components/layouts';
 
 export default function Home() {
-
   return (
     <>
       <Head>
@@ -17,12 +16,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container w={'100vw'} h={'100vh'}>
-        <AppShell pageTitle='Battle' toolbar={<AddMonster />}>
+        <AppShell pageTitle="Battle" toolbar={<AddMonster />}>
           <ListMonsters />
-
         </AppShell>
-
-
       </Container>
     </>
   );
