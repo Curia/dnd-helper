@@ -2,11 +2,12 @@ import React from 'react';
 import Head from 'next/head';
 
 import { Box, Container } from '@chakra-ui/react';
-import { AppShell } from '@saas-ui/react';
 import { AddMonster } from '@/components/addMonster';
 import { ListMonsters } from '@/components/listMonsters';
+import { AppShell } from '@/components/layouts';
 
 export default function Home() {
+
   return (
     <>
       <Head>
@@ -16,16 +17,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container w={'100vw'} h={'100vh'}>
-        <AppShell
-          navbar={
-            <Box as="header" borderBottomWidth="1px" py="2" px="4">
-              Logo
-            </Box>
-          }
-        >
-          <AddMonster />
+        <AppShell pageTitle='Battle' toolbar={<AddMonster />}>
           <ListMonsters />
+
         </AppShell>
+
+
       </Container>
     </>
   );

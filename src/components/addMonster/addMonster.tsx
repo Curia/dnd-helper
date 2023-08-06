@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { Button, Center, useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import {
   CommandBar,
   CommandBarDialog,
@@ -14,8 +14,9 @@ import {
 import { useGetConstants } from "../appProvider/constantsProvider";
 import { useGetMonsterLazyQuery } from "@/gql";
 import { MonsterActions, MonsterContext } from "../appProvider/monsterProvider";
+import { Toolbar, ToolbarButton } from "@saas-ui-pro/react";
 
-export const AddMonster: React.FC<undefined> = () => {
+export const AddMonster: React.FC = () => {
   const { dispatch } = useContext(MonsterContext);
   const { isOpen, onClose, onToggle } = useDisclosure();
   const { monsters } = useGetConstants();
@@ -36,17 +37,16 @@ export const AddMonster: React.FC<undefined> = () => {
   };
 
   return (
-    <Center gap={"10px"} m={5}>
-      <Button colorScheme="green" onClick={onToggle}>
-        Add Monster
-      </Button>
-      <Button
-        colorScheme="red"
+    <Toolbar>
+      <ToolbarButton label="Add Monster" variant="solid"
+        size="md"
+        colorScheme="primary" onClick={onToggle} />
+      <ToolbarButton label="Remove All"
+        variant="solid"
+        size="md"
+        colorScheme="primary"
         onClick={() => dispatch({ type: MonsterActions.CLEAR_MONSTERS })}
-      >
-        Remove All
-      </Button>
-
+      />
       <CommandBar
         onSelect={(value) => {
           addMonster(value);
@@ -78,6 +78,6 @@ export const AddMonster: React.FC<undefined> = () => {
           </CommandBarContent>
         </CommandBarDialog>
       </CommandBar>
-    </Center>
+    </Toolbar>
   );
 };

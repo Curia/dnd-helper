@@ -1,12 +1,34 @@
 query getMonster($monsterIndex: String) {
   monster(index: $monsterIndex) {
     name
+    strength
+    dexterity
+    constitution
+    intelligence
+    wisdom
+    charisma
+    speed {
+      walk
+    }
     armor_class {
       value
+      type
+      armor {
+        name
+        armor_category {
+          name
+          index
+        }
+      }
+      ...MonsterSpells
     }
     hit_points
-    hit_dice
-    hit_points_roll
     index
+  }
+}
+
+fragment MonsterSpells on MonsterArmorClass {
+  spell {
+    name
   }
 }
