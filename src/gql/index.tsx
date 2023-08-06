@@ -2078,7 +2078,7 @@ export type GetMonsterQueryVariables = Exact<{
 }>;
 
 
-export type GetMonsterQuery = { __typename?: 'Query', monster?: { __typename?: 'Monster', name: string, strength: number, dexterity: number, constitution: number, intelligence: number, wisdom: number, charisma: number, hit_points: number, index: string, speed: { __typename?: 'MonsterSpeed', walk?: string | null }, armor_class?: Array<{ __typename?: 'MonsterArmorClass', value: number, type: MonsterArmorClassType, armor?: Array<{ __typename?: 'Armor', name: string, armor_category: { __typename?: 'EquipmentCategory', name: string, index: string } } | null> | null, spell?: { __typename?: 'Spell', name: string } | null } | null> | null } | null };
+export type GetMonsterQuery = { __typename?: 'Query', monster?: { __typename?: 'Monster', name: string, strength: number, dexterity: number, constitution: number, intelligence: number, wisdom: number, charisma: number, hit_points: number, index: string, size: Size, hit_dice: string, type: MonsterType, alignment: string, armor_class?: Array<{ __typename?: 'MonsterArmorClass', value: number, type: MonsterArmorClassType, armor?: Array<{ __typename?: 'Armor', name: string, armor_category: { __typename?: 'EquipmentCategory', name: string, index: string } } | null> | null, spell?: { __typename?: 'Spell', name: string } | null } | null> | null } | null };
 
 export type MonsterSpellsFragment = { __typename?: 'MonsterArmorClass', spell?: { __typename?: 'Spell', name: string } | null };
 
@@ -2106,9 +2106,6 @@ export const GetMonsterDocument = gql`
     intelligence
     wisdom
     charisma
-    speed {
-      walk
-    }
     armor_class {
       value
       type
@@ -2123,6 +2120,10 @@ export const GetMonsterDocument = gql`
     }
     hit_points
     index
+    size
+    hit_dice
+    type
+    alignment
   }
 }
     ${MonsterSpellsFragmentDoc}`;

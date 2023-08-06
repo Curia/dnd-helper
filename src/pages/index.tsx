@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 
-import { Box, Container } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import { AddMonster } from '@/components/addMonster';
-import { ListMonsters } from '@/components/listMonsters';
 import { AppShell } from '@/components/layouts';
+import { ListMonsterCards } from '@/components';
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
       <Container w={'100vw'} h={'100vh'}>
         <AppShell pageTitle="Battle" toolbar={<AddMonster />}>
-          <ListMonsters />
+          <ListMonsterCards />
         </AppShell>
       </Container>
     </>

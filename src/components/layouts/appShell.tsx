@@ -3,7 +3,13 @@ import NextLink from 'next/link';
 
 // Hooks
 import { useRouter } from 'next/router';
-import { useColorMode } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  IconButton,
+  useColorMode,
+  useDisclosure,
+} from '@chakra-ui/react';
 
 // Components
 import { Spacer, IconProps, Icon, Circle } from '@chakra-ui/react';
@@ -18,7 +24,7 @@ import { PageBody, PageHeader, Page } from '@saas-ui-pro/react';
 import { ThemeToggle } from './themeToggle';
 
 // Icons
-import { FiHome, FiBox } from 'react-icons/fi';
+import { FiHome, FiBox, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 import { GiMonsterGrasp } from 'react-icons/gi';
 import { LiaDragonSolid } from 'react-icons/lia';
 
@@ -59,25 +65,37 @@ export const AppShell: React.FC<AppShellProps> = ({
 }) => {
   const router = useRouter();
   const { colorMode } = useColorMode();
+  const { isOpen, onToggle } = useDisclosure({
+    defaultIsOpen: true,
+  });
 
   return (
     <SaasAppShell
       sidebar={
-        <Sidebar>
+        <Sidebar
+          toggleBreakpoint={false}
+          variant={isOpen ? 'default' : 'compact'}
+          transition="width"
+          transitionDuration="normal"
+          width={isOpen ? '280px' : '14'}
+          minWidth="auto"
+        >
           <SidebarToggleButton />
-          <SidebarSection direction="row">
+          <SidebarSection direction={isOpen ? 'row' : 'column'}>
             <Circle bg={colorMode === 'dark' ? 'white' : 'black'}>
               <Icon
                 as={LiaDragonSolid}
-                boxSize={10}
+                boxSize={8}
                 p={'1'}
                 color={colorMode === 'dark' ? 'black' : 'white'}
               />
             </Circle>
             <Spacer />
-            <ThemeToggle />
+            <Center display={isOpen ? 'flex' : 'none'}>
+              <ThemeToggle />
+            </Center>
           </SidebarSection>
-          <SidebarSection aria-label="Main">
+          <SidebarSection flex="1" overflowY="auto" overflowX="hidden">
             {navigationItems.map(({ label, path, icon }, index) => (
               <NavItem
                 key={index}
@@ -89,6 +107,16 @@ export const AppShell: React.FC<AppShellProps> = ({
                 {label}
               </NavItem>
             ))}
+          </SidebarSection>
+          <SidebarSection direction={isOpen ? 'row' : 'column'}>
+            <Spacer />
+            <IconButton
+              onClick={onToggle}
+              variant="ghost"
+              size="sm"
+              icon={isOpen ? <FiChevronsLeft /> : <FiChevronsRight />}
+              aria-label="Toggle Sidebar"
+            />
           </SidebarSection>
         </Sidebar>
       }

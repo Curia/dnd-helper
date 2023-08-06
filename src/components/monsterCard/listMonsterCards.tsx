@@ -7,9 +7,9 @@ import { MonsterContext } from '../appProvider/monsterProvider';
 import { SimpleGrid } from '@chakra-ui/react';
 
 // Types
-import { MonsterCard } from '@/components';
+import { MonsterCard } from './monsterCard';
 
-export const ListMonsters: React.FC<undefined> = () => {
+export const ListMonsterCards: React.FC = () => {
   const {
     state: { monsters },
   } = useContext(MonsterContext);
@@ -17,7 +17,7 @@ export const ListMonsters: React.FC<undefined> = () => {
   return (
     <SimpleGrid
       spacing={4}
-      templateColumns="repeat(auto-fill, minmax(400px, 1fr))"
+      templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
     >
       {monsters.map((monster, index) => (
         <MonsterCard monster={monster} key={index} />

@@ -7,9 +7,6 @@ query getMonster($monsterIndex: String) {
     intelligence
     wisdom
     charisma
-    speed {
-      walk
-    }
     armor_class {
       value
       type
@@ -24,6 +21,10 @@ query getMonster($monsterIndex: String) {
     }
     hit_points
     index
+    size
+    hit_dice
+    type
+    alignment
   }
 }
 

@@ -4,7 +4,7 @@ import React from 'react';
 import type { Monster } from '@/gql';
 
 // Components
-import { HStack, Tag } from '@chakra-ui/react';
+import { Tag, TagLabel, Text, Wrap, WrapItem } from '@chakra-ui/react';
 
 // Functions
 import { calculateAbilityModifier } from '@/utils';
@@ -24,19 +24,23 @@ export const MonsterAttributes = ({
   monster: Partial<Monster>;
 }) => {
   return (
-    <HStack spacing={4}>
+    <Wrap>
       {Object.entries(ATTRIBUTE_TYPES).map(([, attributeName], index) => {
         const attributeValue = monster[attributeName];
 
         return (
-          <Tag key={index} variant="solid" colorScheme="teal">
-            {attributeName.slice(0, 3).toUpperCase()}{' '}
-            {`${attributeValue} (+${calculateAbilityModifier(
-              Number(attributeValue),
-            )})`}
-          </Tag>
+          <WrapItem key={index}>
+            <Tag>
+              <Text mr={'1'} fontWeight={'bold'} textTransform={'uppercase'}>
+                {attributeName.slice(0, 3)}
+              </Text>
+              <TagLabel>{`${attributeValue} (+${calculateAbilityModifier(
+                Number(attributeValue),
+              )})`}</TagLabel>
+            </Tag>
+          </WrapItem>
         );
       })}
-    </HStack>
+    </Wrap>
   );
 };
