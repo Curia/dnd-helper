@@ -2078,7 +2078,7 @@ export type GetMonsterQueryVariables = Exact<{
 }>;
 
 
-export type GetMonsterQuery = { __typename?: 'Query', monster?: { __typename?: 'Monster', name: string, strength: number, dexterity: number, constitution: number, intelligence: number, wisdom: number, charisma: number, hit_points: number, index: string, size: Size, hit_dice: string, type: MonsterType, alignment: string, armor_class?: Array<{ __typename?: 'MonsterArmorClass', value: number, type: MonsterArmorClassType, armor?: Array<{ __typename?: 'Armor', name: string, armor_category: { __typename?: 'EquipmentCategory', name: string, index: string } } | null> | null, spell?: { __typename?: 'Spell', name: string } | null } | null> | null } | null };
+export type GetMonsterQuery = { __typename?: 'Query', monster?: { __typename?: 'Monster', name: string, strength: number, dexterity: number, constitution: number, intelligence: number, wisdom: number, charisma: number, hit_points: number, index: string, size: Size, hit_dice: string, type: MonsterType, alignment: string, armor_class?: Array<{ __typename?: 'MonsterArmorClass', value: number, type: MonsterArmorClassType, desc?: string | null, armor?: Array<{ __typename?: 'Armor', name: string, armor_category: { __typename?: 'EquipmentCategory', name: string, index: string } } | null> | null, condition?: { __typename?: 'Condition', name: string, index: string, desc: Array<string> } | null, spell?: { __typename?: 'Spell', name: string } | null } | null> | null, speed: { __typename?: 'MonsterSpeed', burrow?: string | null, climb?: string | null, fly?: string | null, hover?: boolean | null, swim?: string | null, walk?: string | null } } | null };
 
 export type MonsterSpellsFragment = { __typename?: 'MonsterArmorClass', spell?: { __typename?: 'Spell', name: string } | null };
 
@@ -2117,6 +2117,15 @@ export const GetMonsterDocument = gql`
         }
       }
       ...MonsterSpells
+      condition {
+        name
+        index
+        desc
+      }
+      spell {
+        name
+      }
+      desc
     }
     hit_points
     index
@@ -2124,6 +2133,14 @@ export const GetMonsterDocument = gql`
     hit_dice
     type
     alignment
+    speed {
+      burrow
+      climb
+      fly
+      hover
+      swim
+      walk
+    }
   }
 }
     ${MonsterSpellsFragmentDoc}`;

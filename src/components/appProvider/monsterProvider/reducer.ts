@@ -2,18 +2,26 @@
 import { MonsterActions } from './types';
 
 // Types
-import type { MonsterState, MonsterAction } from './types';
+import type { MonsterState, MonsterAction, BattleMonster } from './types';
+
+// Functions
+import { v4 as uuidv4 } from 'uuid';
 
 export const monsterReducer = (
   state: MonsterState,
   action: MonsterAction,
 ): MonsterState => {
   switch (action.type) {
-    case MonsterActions.ADD_MONSTER:
+    case MonsterActions.ADD_MONSTER: {
+      const monsterToAdd: BattleMonster = {
+        uuid: uuidv4(),
+        ...action.payload,
+      };
       return {
         ...state,
-        monsters: [...state.monsters, action.payload],
+        monsters: [...state.monsters, monsterToAdd],
       };
+    }
     case MonsterActions.REMOVE_MONSTER:
       return {
         ...state,

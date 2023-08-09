@@ -1,7 +1,11 @@
 import { Monster } from '@/gql';
 
+export interface BattleMonster extends Partial<Monster> {
+  uuid: string;
+}
+
 export interface MonsterState {
-  monsters: Partial<Monster>[];
+  monsters: BattleMonster[];
 }
 
 export enum MonsterActions {

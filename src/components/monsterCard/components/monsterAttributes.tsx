@@ -1,46 +1,57 @@
 import React from 'react';
 
-// Types
-import type { Monster } from '@/gql';
-
 // Components
-import { Tag, TagLabel, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import { Stack, Text, Heading } from '@chakra-ui/react';
+
+// Types
+import { BattleMonster } from '@/components/appProvider/monsterProvider';
+import { MonsterArmorClass, MonsterSpeed } from '@/gql';
 
 // Functions
-import { calculateAbilityModifier } from '@/utils';
+import { calcArmorClass } from '@/utils';
 
-enum ATTRIBUTE_TYPES {
-  STRENGTH = 'strength',
-  DEXTERITY = 'dexterity',
-  CONSTITUTION = 'constitution',
-  INTELLIGENCE = 'intelligence',
-  WISDOM = 'wisdom',
-  CHARISMA = 'charisma',
-}
-
-export const MonsterAttributes = ({
-  monster,
-}: {
-  monster: Partial<Monster>;
-}) => {
+const ArmourClass = ({ armorClass }: { armorClass: MonsterArmorClass[] }) => {
   return (
-    <Wrap>
-      {Object.entries(ATTRIBUTE_TYPES).map(([, attributeName], index) => {
-        const attributeValue = monster[attributeName];
+    <>
+      <Heading size="xs" textTransform="uppercase">
+        Armor Class
+      </Heading>
+      <Text fontSize="sm">{calcArmorClass(armorClass)}</Text>
+    </>
+  );
+};
 
-        return (
-          <WrapItem key={index}>
-            <Tag>
-              <Text mr={'1'} fontWeight={'bold'} textTransform={'uppercase'}>
-                {attributeName.slice(0, 3)}
-              </Text>
-              <TagLabel>{`${attributeValue} (+${calculateAbilityModifier(
-                Number(attributeValue),
-              )})`}</TagLabel>
-            </Tag>
-          </WrapItem>
-        );
-      })}
-    </Wrap>
+const SpeedClass = ({ monsterSpeed }: { monsterSpeed: MonsterSpeed }) => {
+  const mappedSpeeds = Object.entries(monsterSpeed)
+    .slice(1)
+    .filter(([, speed]) => speed);
+  return (
+    <>
+      <Heading size="xs" textTransform="uppercase">
+        Speed
+      </Heading>
+      <Text fontSize="sm">
+        {mappedSpeeds.map(([type, speed], index) => (
+          <>{`${type}: ${speed}${
+            index + 1 < mappedSpeeds.length ? ', ' : ''
+          }`}</>
+        ))}
+      </Text>
+    </>
+  );
+};
+
+export const MonsterAttributes = ({ monster }: { monster: BattleMonster }) => {
+  const { hit_points, armor_class, speed } = monster;
+
+  return (
+    <Stack>
+      <ArmourClass armorClass={armor_class} />
+      <Heading size="xs" textTransform="uppercase">
+        Hit Points
+      </Heading>
+      <Text fontSize="sm">{hit_points}</Text>
+      <SpeedClass monsterSpeed={speed} />
+    </Stack>
   );
 };

@@ -18,6 +18,15 @@ query getMonster($monsterIndex: String) {
         }
       }
       ...MonsterSpells
+      condition {
+        name
+        index
+        desc
+      }
+      spell {
+        name
+      }
+      desc
     }
     hit_points
     index
@@ -25,6 +34,14 @@ query getMonster($monsterIndex: String) {
     hit_dice
     type
     alignment
+    speed {
+      burrow
+      climb
+      fly
+      hover
+      swim
+      walk
+    }
   }
 }
 

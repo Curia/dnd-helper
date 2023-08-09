@@ -1,1 +1,1 @@
-export * from './monsterAttributes';
+export * from './monsterStats';

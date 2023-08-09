@@ -19,8 +19,8 @@ export const ListMonsterCards: React.FC = () => {
       spacing={4}
       templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
     >
-      {monsters.map((monster, index) => (
-        <MonsterCard monster={monster} key={index} />
+      {monsters.map((monster) => (
+        <MonsterCard monster={monster} key={monster.uuid} />
       ))}
     </SimpleGrid>
   );

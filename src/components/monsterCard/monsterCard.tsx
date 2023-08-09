@@ -12,17 +12,24 @@ import {
   IconButton,
   Spacer,
   Divider,
+  Stack,
+  StackDivider,
+  Tag,
+  TagLabel,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
-import { MonsterAttributes } from '@/components';
+import { MonsterStats } from '@/components';
 
 // Icons
 import { FiMoreVertical, FiBook } from 'react-icons/fi';
 
 // Types
-import type { Monster } from '@/gql';
+import { BattleMonster } from '../appProvider/monsterProvider';
+import { MonsterAttributes } from './components/monsterAttributes';
 
 interface MonsterCardProps {
-  monster: Partial<Monster>;
+  monster: BattleMonster;
 }
 
 export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
@@ -35,8 +42,23 @@ export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
       <CardHeader>
         <Flex>
           <Box>
-            <Heading size="md">{name}</Heading>
-            <Text>{`${sizeDesc.toLowerCase()}, ${alignment}`}</Text>
+            <Heading size="md" mb={'2'}>
+              {name}
+            </Heading>
+            <Wrap>
+              <WrapItem>
+                <Tag variant="subtle" size={'sm'}>
+                  <TagLabel fontWeight={'bold'}>
+                    {sizeDesc.toLowerCase()}
+                  </TagLabel>
+                </Tag>
+              </WrapItem>
+              <WrapItem>
+                <Tag variant="subtle" size={'sm'}>
+                  <TagLabel fontWeight={'bold'}>{alignment}</TagLabel>
+                </Tag>
+              </WrapItem>
+            </Wrap>
           </Box>
           <Spacer />
           <IconButton
@@ -54,8 +76,14 @@ export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
         </Flex>
       </CardHeader>
       <CardBody>
-        <Divider mb={'2'} />
-        <MonsterAttributes monster={monster} />
+        <Stack divider={<StackDivider />}>
+          <Box>
+            <MonsterAttributes monster={monster} />
+          </Box>
+          <Box>
+            <MonsterStats monster={monster} />
+          </Box>
+        </Stack>
       </CardBody>
     </Card>
   );
