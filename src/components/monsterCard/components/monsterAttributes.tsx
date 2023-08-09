@@ -13,10 +13,10 @@ import { calcArmorClass } from '@/utils';
 const ArmourClass = ({ armorClass }: { armorClass: MonsterArmorClass[] }) => {
   return (
     <>
-      <Heading size="xs" textTransform="uppercase">
+      <Heading size="sm" textTransform="uppercase">
         Armor Class
       </Heading>
-      <Text fontSize="sm">{calcArmorClass(armorClass)}</Text>
+      <Text fontSize="md">{calcArmorClass(armorClass)}</Text>
     </>
   );
 };
@@ -27,10 +27,10 @@ const SpeedClass = ({ monsterSpeed }: { monsterSpeed: MonsterSpeed }) => {
     .filter(([, speed]) => speed);
   return (
     <>
-      <Heading size="xs" textTransform="uppercase">
+      <Heading size="sm" textTransform="uppercase">
         Speed
       </Heading>
-      <Text fontSize="sm">
+      <Text fontSize="md">
         {mappedSpeeds.map(([type, speed], index) => (
           <>{`${type}: ${speed}${
             index + 1 < mappedSpeeds.length ? ', ' : ''
@@ -47,10 +47,10 @@ export const MonsterAttributes = ({ monster }: { monster: BattleMonster }) => {
   return (
     <Stack>
       <ArmourClass armorClass={armor_class} />
-      <Heading size="xs" textTransform="uppercase">
+      <Heading size="sm" textTransform="uppercase">
         Hit Points
       </Heading>
-      <Text fontSize="sm">{hit_points}</Text>
+      <Text fontSize="md">{hit_points}</Text>
       <SpeedClass monsterSpeed={speed} />
     </Stack>
   );

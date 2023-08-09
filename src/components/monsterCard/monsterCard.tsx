@@ -6,7 +6,6 @@ import {
   CardBody,
   CardHeader,
   Heading,
-  Text,
   Flex,
   Box,
   IconButton,
@@ -39,22 +38,22 @@ export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
 
   return (
     <Card variant={'filled'}>
-      <CardHeader>
+      <CardHeader pb={'0'}>
         <Flex>
           <Box>
-            <Heading size="md" mb={'2'}>
+            <Heading size="lg" mb={'2'}>
               {name}
             </Heading>
             <Wrap>
               <WrapItem>
-                <Tag variant="subtle" size={'sm'}>
+                <Tag variant="subtle">
                   <TagLabel fontWeight={'bold'}>
                     {sizeDesc.toLowerCase()}
                   </TagLabel>
                 </Tag>
               </WrapItem>
               <WrapItem>
-                <Tag variant="subtle" size={'sm'}>
+                <Tag variant="subtle">
                   <TagLabel fontWeight={'bold'}>{alignment}</TagLabel>
                 </Tag>
               </WrapItem>
@@ -74,6 +73,7 @@ export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
             icon={<FiMoreVertical />}
           />
         </Flex>
+        <Divider mt={'4'} />
       </CardHeader>
       <CardBody>
         <Stack divider={<StackDivider />}>

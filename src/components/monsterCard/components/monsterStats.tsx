@@ -32,6 +32,7 @@ export const MonsterStats = ({ monster }: { monster: BattleMonster }) => {
     <Wrap>
       {Object.entries(ATTRIBUTE_TYPES).map(([, attributeName], index) => {
         const attributeValue = monster[attributeName];
+        const modValue = calcStatModifier(Number(attributeValue));
 
         return (
           <WrapItem key={index}>
@@ -39,9 +40,9 @@ export const MonsterStats = ({ monster }: { monster: BattleMonster }) => {
               <Text mr={'1'} fontWeight={'bold'} textTransform={'uppercase'}>
                 {attributeName.slice(0, 3)}
               </Text>
-              <TagLabel>{`${attributeValue} (+${calcStatModifier(
-                Number(attributeValue),
-              )})`}</TagLabel>
+              <TagLabel>{`${attributeValue} (${
+                modValue > 0 ? `+ ${modValue}` : ` ${modValue}`
+              })`}</TagLabel>
             </Tag>
           </WrapItem>
         );
