@@ -17,8 +17,12 @@ import {
   TagLabel,
   Wrap,
   WrapItem,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react';
-import { MonsterStats } from '@/components';
+import { MonsterHitPoints, MonsterStats } from '@/components';
 
 // Icons
 import { FiMoreVertical, FiBook } from 'react-icons/fi';
@@ -32,9 +36,7 @@ interface MonsterCardProps {
 }
 
 export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
-  const { name, size, type, alignment } = monster;
-
-  const sizeDesc = `${size} ${type}`;
+  const { name, hit_points, hit_dice } = monster;
 
   return (
     <Card variant={'filled'}>
@@ -44,20 +46,6 @@ export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
             <Heading size="lg" mb={'2'}>
               {name}
             </Heading>
-            <Wrap>
-              <WrapItem>
-                <Tag variant="subtle">
-                  <TagLabel fontWeight={'bold'}>
-                    {sizeDesc.toLowerCase()}
-                  </TagLabel>
-                </Tag>
-              </WrapItem>
-              <WrapItem>
-                <Tag variant="subtle">
-                  <TagLabel fontWeight={'bold'}>{alignment}</TagLabel>
-                </Tag>
-              </WrapItem>
-            </Wrap>
           </Box>
           <Spacer />
           <IconButton
@@ -66,13 +54,20 @@ export const MonsterCard: React.FC<MonsterCardProps> = ({ monster }) => {
             aria-label="More monster info"
             icon={<FiBook />}
           />
-          <IconButton
-            variant="ghost"
-            colorScheme="gray"
-            aria-label="See monster menu"
-            icon={<FiMoreVertical />}
-          />
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              variant="ghost"
+              colorScheme="gray"
+              aria-label="See monster menu"
+              icon={<FiMoreVertical />}
+            ></MenuButton>
+            <MenuList>
+              <MenuItem>Delete</MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
+        <MonsterHitPoints hitPoints={hit_points} hitDice={hit_dice} />
         <Divider mt={'4'} />
       </CardHeader>
       <CardBody>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import { Stack, Text, Heading } from '@chakra-ui/react';
+import { Stack, Text, Heading, chakra } from '@chakra-ui/react';
 
 // Types
 import { BattleMonster } from '@/components/appProvider/monsterProvider';
@@ -13,7 +13,7 @@ import { calcArmorClass } from '@/utils';
 const ArmourClass = ({ armorClass }: { armorClass: MonsterArmorClass[] }) => {
   return (
     <>
-      <Heading size="sm" textTransform="uppercase">
+      <Heading size="md" textTransform="uppercase">
         Armor Class
       </Heading>
       <Text fontSize="md">{calcArmorClass(armorClass)}</Text>
@@ -27,14 +27,14 @@ const SpeedClass = ({ monsterSpeed }: { monsterSpeed: MonsterSpeed }) => {
     .filter(([, speed]) => speed);
   return (
     <>
-      <Heading size="sm" textTransform="uppercase">
+      <Heading size="md" textTransform="uppercase">
         Speed
       </Heading>
       <Text fontSize="md">
         {mappedSpeeds.map(([type, speed], index) => (
-          <>{`${type}: ${speed}${
+          <chakra.span key={index}>{`${type}: ${speed}${
             index + 1 < mappedSpeeds.length ? ', ' : ''
-          }`}</>
+          }`}</chakra.span>
         ))}
       </Text>
     </>
@@ -42,15 +42,11 @@ const SpeedClass = ({ monsterSpeed }: { monsterSpeed: MonsterSpeed }) => {
 };
 
 export const MonsterAttributes = ({ monster }: { monster: BattleMonster }) => {
-  const { hit_points, armor_class, speed } = monster;
+  const { armor_class, speed } = monster;
 
   return (
     <Stack>
       <ArmourClass armorClass={armor_class} />
-      <Heading size="sm" textTransform="uppercase">
-        Hit Points
-      </Heading>
-      <Text fontSize="md">{hit_points}</Text>
       <SpeedClass monsterSpeed={speed} />
     </Stack>
   );
