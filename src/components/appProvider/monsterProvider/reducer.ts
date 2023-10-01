@@ -12,6 +12,12 @@ export const monsterReducer = (
   action: MonsterAction,
 ): MonsterState => {
   switch (action.type) {
+    case MonsterActions.LOAD_MONSTERS: {
+      return {
+        ...state,
+        monsters: [...action.payload],
+      };
+    }
     case MonsterActions.ADD_MONSTER: {
       const monsterToAdd: BattleMonster = {
         uuid: uuidv4(),
@@ -22,18 +28,38 @@ export const monsterReducer = (
         monsters: [...state.monsters, monsterToAdd],
       };
     }
-    case MonsterActions.REMOVE_MONSTER:
+    case MonsterActions.DELETE_MONSTER: {
       return {
         ...state,
         monsters: state.monsters.filter(
-          (monster) => monster.index !== action.payload,
+          (monster) => monster.uuid !== action.payload,
         ),
       };
-    case MonsterActions.CLEAR_MONSTERS:
+    }
+    case MonsterActions.COPY_MONSTER: {
+      const monsterToDuplicate = state.monsters.find(
+        (monster) => monster.uuid === action.payload.uuid,
+      );
+      if (!monsterToDuplicate) {
+        return state;
+      }
+
+      const duplicatedMonster = {
+        ...monsterToDuplicate,
+        uuid: uuidv4(), // Generate a new UUID for the duplicated monster
+      };
+
+      return {
+        ...state,
+        monsters: [...state.monsters, duplicatedMonster],
+      };
+    }
+    case MonsterActions.CLEAR_MONSTERS: {
       return {
         ...state,
         monsters: [],
       };
+    }
     case MonsterActions.DUPLICATE_MONSTER: {
       const monsterToDuplicate = state.monsters.find(
         (monster) => monster.index === action.payload,

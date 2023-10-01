@@ -13,7 +13,11 @@ import {
 } from '@saas-ui/command-bar';
 import { useGetConstants } from '../appProvider/constantsProvider';
 import { useGetMonsterLazyQuery } from '@/gql';
-import { MonsterActions, MonsterContext } from '../appProvider/monsterProvider';
+import {
+  BattleMonster,
+  MonsterActions,
+  MonsterContext,
+} from '../appProvider/monsterProvider';
 import { Toolbar, ToolbarButton } from '@saas-ui-pro/react';
 
 export const AddMonster: React.FC = () => {

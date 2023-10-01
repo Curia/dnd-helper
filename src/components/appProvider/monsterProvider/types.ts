@@ -9,14 +9,18 @@ export interface MonsterState {
 }
 
 export enum MonsterActions {
+  LOAD_MONSTERS = 'LOAD_MONSTERS',
   ADD_MONSTER = 'ADD_MONSTER',
-  REMOVE_MONSTER = 'REMOVE_MONSTER',
+  DELETE_MONSTER = 'DELETE_MONSTER',
+  COPY_MONSTER = 'COPY_MONSTER',
   CLEAR_MONSTERS = 'CLEAR_MONSTERS',
   DUPLICATE_MONSTER = 'DUPLICATE_MONSTER',
 }
 
 export type MonsterAction =
-  | { type: MonsterActions.ADD_MONSTER; payload: Partial<Monster> }
-  | { type: MonsterActions.REMOVE_MONSTER; payload: string }
+  | { type: MonsterActions.LOAD_MONSTERS; payload: BattleMonster[] }
+  | { type: MonsterActions.ADD_MONSTER; payload: Monster }
+  | { type: MonsterActions.DELETE_MONSTER; payload: string }
+  | { type: MonsterActions.COPY_MONSTER; payload: BattleMonster }
   | { type: MonsterActions.CLEAR_MONSTERS }
   | { type: MonsterActions.DUPLICATE_MONSTER; payload: string };

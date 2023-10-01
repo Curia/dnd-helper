@@ -42,6 +42,21 @@ query getMonster($monsterIndex: String) {
       swim
       walk
     }
+    actions {
+      name
+      multiattack_type
+      desc
+      attack_bonus
+      attacks {
+        name
+        damage {
+          damage_dice
+          damage_type {
+            name
+          }
+        }
+      }
+    }
   }
 }
 

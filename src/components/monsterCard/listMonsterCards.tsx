@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 // Contexts
 import { MonsterContext } from '../appProvider/monsterProvider';
@@ -13,6 +13,10 @@ export const ListMonsterCards: React.FC = () => {
   const {
     state: { monsters },
   } = useContext(MonsterContext);
+
+  useEffect(() => {
+    console.log('monsters', monsters);
+  }, [monsters]);
 
   return (
     <SimpleGrid
